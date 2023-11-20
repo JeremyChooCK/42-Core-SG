@@ -12,31 +12,31 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 	Circle 1
 	<br><br>
 	<a alt="ft_printf" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/ft_printf">
-		<img src="./img/printf.png">
+		<img src="./imgs/printf.png">
 	</a>
 	<a alt="get next line" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/get_next_line">
-		<img src="./img/gnl.png">
+		<img src="./imgs/gnl.png">
 	</a>
 	<a alt="born2beroot" href="">
-		<img src="./img/born2beroot.png">
+		<img src="./imgs/born2beroot.png">
 	</a>
     <br><br>
 	Circle 2
 	<br><br>
 	<a alt="pipex" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/pipex">
-		<img src="./img/pipex.png">
+		<img src="./imgs/pipex.png">
 	</a>
 	<a alt="fractal" href="">
-		<img src="./img/fractal.png">
+		<img src="./imgs/fractal.png">
 	</a>
 	<a alt="push_swap" href="">
-		<img src="./img/push_swap.png">
+		<img src="./imgs/push_swap.png">
 	</a>
     <br><br>
 	Circle 3
 	<br><br>
 	<a alt="Philosophers" href="">
-		<img src="./img/philo.png">
+		<img src="./imgs/philo.png">
 	</a>
     <br><br>
 	Circle 4
