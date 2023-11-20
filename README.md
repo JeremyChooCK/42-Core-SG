@@ -6,7 +6,7 @@ Welcome to my repository where I've curated projects completed during my time at
 
 Here, you'll find a variety of projects ranging from simple algorithms to complex software solutions. These projects demonstrate my proficiency in software development and my ability to tackle challenging problems.
 
-* <div align="center">
+<div align="center">
 		<a alt="libft" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/libft"><img width="200px" src="./imgs/libft.png" style="vertical-align: middle;"></a>
 	<br><br>
 	Circle 1
