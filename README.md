@@ -7,36 +7,36 @@ Welcome to my repository where I've curated projects completed during my time at
 Here, you'll find a variety of projects ranging from simple algorithms to complex software solutions. These projects demonstrate my proficiency in software development and my ability to tackle challenging problems.
 
 * <div align="center">
-		<a alt="libft" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/libft"><img src="./img/libft.png" style="vertical-align: middle;"></a>
+		<a alt="libft" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/libft"><img width="100px" src="./imgs/libft.png" style="vertical-align: middle;"></a>
 	<br><br>
 	Circle 1
 	<br><br>
 	<a alt="ft_printf" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/ft_printf">
-		<img src="./imgs/printf.png">
+		<img width="100px" src="./imgs/printf.png">
 	</a>
 	<a alt="get next line" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/get_next_line">
-		<img src="./imgs/gnl.png">
+		<img width="100px" src="./imgs/gnl.png">
 	</a>
 	<a alt="born2beroot" href="">
-		<img src="./imgs/born2beroot.png">
+		<img width="100px" src="./imgs/born2beroot.png">
 	</a>
     <br><br>
 	Circle 2
 	<br><br>
 	<a alt="pipex" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/pipex">
-		<img src="./imgs/pipex.png">
+		<img width="100px" src="./imgs/pipex.png">
 	</a>
 	<a alt="fractal" href="">
-		<img src="./imgs/fractal.png">
+		<img width="100px" src="./imgs/fractal.png">
 	</a>
 	<a alt="push_swap" href="">
-		<img src="./imgs/push_swap.png">
+		<img width="100px" src="./imgs/push_swap.png">
 	</a>
     <br><br>
 	Circle 3
 	<br><br>
 	<a alt="Philosophers" href="">
-		<img src="./imgs/philo.png">
+		<img width="100px" src="./imgs/philo.png">
 	</a>
     <br><br>
 	Circle 4
