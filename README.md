@@ -29,13 +29,13 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 	<a alt="fractal" href="">
 		<img width="200px" src="./imgs/fractal.png">
 	</a>
-	<a alt="push_swap" href="">
+	<a alt="push_swap" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/push_swap">
 		<img width="200px" src="./imgs/push_swap.png">
 	</a>
     <br><br>
 	Circle 3
 	<br><br>
-	<a alt="Philosophers" href="">
+	<a alt="Philosophers" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/philosophers">
 		<img width="200px" src="./imgs/philo.png">
 	</a>
     <br><br>
