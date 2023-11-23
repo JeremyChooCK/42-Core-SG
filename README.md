@@ -26,7 +26,7 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 	<a alt="pipex" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/pipex">
 		<img width="200px" src="./imgs/pipex.png">
 	</a>
-	<a alt="fractal" href="">
+	<a alt="fractal" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/fract-ol">
 		<img width="200px" src="./imgs/fractal.png">
 	</a>
 	<a alt="push_swap" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/push_swap">
