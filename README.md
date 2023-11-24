@@ -22,8 +22,9 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 			</p>
 	</div>
 </div>
+
 <div align="left" class="project">
-	<a alt="ft_printf" href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/ft_printf"><img width="200px" src="./imgs/printf.png" style="vertical-align: middle;"></a>
+	<a alt="ft_printf"  href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/ft_printf"><img width="200px" src="./imgs/printf.png" style="vertical-align: middle;"></a>
 	<div>
 			<h2 class="completed">
 				<a href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/ft_printf">FT_PRINTF</a> - 100/100
@@ -72,7 +73,7 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 				<a href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/pipex">PIPEX</a> - 100/100
 			</h2 class="completed">
 			<p>
-				This project recreates the PIPE(|) function in linux
+				This project recreates the PIPE( | ) function in linux
 			<br>
 			- Skills: File Descriptors, Input and Output manipulation, Multi Process Handling, Forks
 			<br>
@@ -86,12 +87,11 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 			<h2 class="completed">
 				<a href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/fract-ol">FRACT-OL</a> - 125/100
 			</h2 class="completed">
-			<p>
-				This project involves writing out your very own C library that contains many different functions that can be used regularly.
+			<p>This project involves the use of graphical libraries to plot and draw out different fractals
 			<br>
-			- Skills: Pointers, Memory manipulation, Structures, Linked lists.
+			- Skills: Mouse and key event listeners, Minilibx, Structures, Complex Numbers.
 			<br>
-			- External functions: write, malloc, free
+			- External functions: open, close, read, write, malloc, free, perror, strerror, exit, math library, minilibx
 			</p>
 	</div>
 </div>
@@ -102,11 +102,11 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 				<a href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/push_swap">PUSH_SWAP</a> - 85/100
 			</h2 class="completed">
 			<p>
-				This project involves writing out your very own C library that contains many different functions that can be used regularly.
+				This project requires a stack of numbers to be sorted while being limited to a small set of actions and to sort with the lowest amount of actions
 			<br>
-			- Skills: Pointers, Memory manipulation, Structures, Linked lists.
+			- Skills: Soring Algorithms
 			<br>
-			- External functions: write, malloc, free
+			- External functions: read, write, malloc, free, exit
 			</p>
 	</div>
 </div>
@@ -117,11 +117,35 @@ Here, you'll find a variety of projects ranging from simple algorithms to comple
 				<a href="https://github.com/JeremyChooCK/42-Core-SG/tree/main/philosophers">PHILOSOPHERS</a> - 100/100
 			</h2 class="completed">
 			<p>
-				This project involves writing out your very own C library that contains many different functions that can be used regularly.
+				This project proposes the dining philosophers problem and requires a solution with the use of multi-threading and mutexes.
 			<br>
-			- Skills: Pointers, Memory manipulation, Structures, Linked lists.
+			- Skills: Multi-threading.
 			<br>
-			- External functions: write, malloc, free
+			- External functions: memset, printf, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
+			</p>
+	</div>
+</div>
+<div align="left" class="project">
+	<a alt="minishell" href="https://github.com/JeremyChooCK/42-Minishell"><img width="200px" src="./imgs/minishell.png" style="vertical-align: middle; scale:1.2;"></a>
+	<div>
+			<h2 class="pending">
+				<a href="https://github.com/JeremyChooCK/42-Minishell">MINISHELL</a> - pending
+			</h2 class="pending">
+			<p>
+			This project involves writing your very own shell that can be used in place of other shells such as bash, zsh stc.
+			<br>
+			<!-- - Skills: Multi-threading. -->
+			<br>
+			- External functions: readline, rl_clear_history, rl_on_new_line,
+rl_replace_line, rl_redisplay, add_history,
+printf, malloc, free, write, access, open, read,
+close, fork, wait, waitpid, wait3, wait4, signal,
+sigaction, sigemptyset, sigaddset, kill, exit,
+getcwd, chdir, stat, lstat, fstat, unlink, execve,
+dup, dup2, pipe, opendir, readdir, closedir,
+strerror, perror, isatty, ttyname, ttyslot, ioctl,
+getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
+tgetnum, tgetstr, tgoto, tputs
 			</p>
 	</div>
 </div>
@@ -156,16 +180,23 @@ While these projects are primarily for showcasing my work, I'm open to suggestio
 	.project{
 		display: flex;
 		justify-content: left;
+		align-items: center;
 		min-width: 920px;
 		width: 100%;
+		/* height: 400px; */
 		/* outline:solid red 1px; */
 	}
 	.project img{
-		aspect-ratio: 1 / 1;
-		height: 100%;
+		/* height: 100%; */
+		/* width: 400px; */
+		/* object-fit: cover; */
+		/* scale: 0.5; */
 	}
 	.completed{
 		color:rgb(0, 255, 72);
+	}
+	.pending{
+		color:orange;
 	}
 	.project p{
 		line-height: 25px;
@@ -173,5 +204,8 @@ While these projects are primarily for showcasing my work, I'm open to suggestio
 	.project > div{
 		width: 60%;
 		padding: 20px;
+	}
+	*{
+		/* outline: solid red 1px; */
 	}
 </style>
