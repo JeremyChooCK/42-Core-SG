@@ -29,7 +29,7 @@ Throughout these projects, I've developed a strong set of skills, including:
 
 ## Connect with Me
 
-I'm always open to discussing technology, coding, and innovation. Feel free to connect with me on [LinkedIn](Your-LinkedIn-Profile-Link).
+I'm always open to discussing technology, coding, and innovation. Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/jeremy-choo-3a7b2522a/).
 
 ## Acknowledgements
 
