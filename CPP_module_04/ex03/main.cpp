@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-#include "main.hpp"
-
 int main() {
     // Testing MateriaSource
     IMateriaSource* src = new MateriaSource();
