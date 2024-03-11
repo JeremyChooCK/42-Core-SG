@@ -6,7 +6,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./requirements/nginx/conf:/etc/nginx/sites-available
+      - wordpress_data:/var/www/html # Adjusted to match the expected directory structure
     depends_on:
       - wordpress
       - mariadb
@@ -15,7 +15,7 @@ services:
   wordpress:
     build: ./requirements/wordpress
     volumes:
-      - wordpress_data:/var/www/wordpress
+      - wordpress_data:/var/www/html # Ensure this matches your WordPress/nginx root
     depends_on:
       - mariadb
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  wordpress_data:
+  wordpress_data: # This volume is shared between WordPress and NGINX
   db_data:
 
 networks:

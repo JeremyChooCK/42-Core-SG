@@ -1,24 +1,32 @@
 # Use the penultimate stable Debian image as the base
 FROM debian:buster
 
-RUN mkdir -p /run/php
+# Install Nginx and other necessary tools
+RUN apt-get update && \
+    apt-get install -y nginx git
 
-# Install WordPress dependencies and php-fpm
-RUN apt-get update && apt-get install -y php-fpm php-mysql wget
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/sites-enabled/default
 
-# Create the /var/www directory
-RUN mkdir -p /var/www
+# Clone your GitHub repository
+RUN git clone https://github.com/JeremyChooCK/2D-Car-learns-to-drive-with-N.E.A.T..git /var/www/html/myapp
 
-# Download and extract WordPress
-RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz && \
-    tar -xzf /tmp/wordpress.tar.gz -C /var/www/ && \
-    chown -R www-data:www-data /var/www/wordpress
+# Create a simple Nginx configuration to serve your project
+RUN echo "server {\n\
+    listen 80;\n\
+    server_name _;\n\
+    root /var/www/html/myapp;\n\
+    index index.html;\n\
+    location / {\n\
+        try_files \$uri \$uri/ =404;\n\
+    }\n\
+}" > /etc/nginx/sites-available/myapp
 
-# Configure php-fpm to listen on a socket
-RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/' /etc/php/7.3/fpm/pool.d/www.conf
+# Enable the Nginx configuration
+RUN ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
 
-# Expose the port php-fpm is listening on
-EXPOSE 9000
+# Expose port 80 to access Nginx
+EXPOSE 80
 
-# Start php-fpm in the foreground
-CMD ["php-fpm7.3", "-F"]
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
