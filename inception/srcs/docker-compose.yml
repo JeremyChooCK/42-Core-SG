@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    volumes:
+      - ./requirements/nginx/conf:/etc/nginx/sites-available
+    depends_on:
+      - wordpress
+      - mariadb
+    restart: unless-stopped
+
+  wordpress:
+    build: ./requirements/wordpress
+    volumes:
+      - wordpress_data:/var/www/wordpress
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
+  mariadb:
+    build: ./requirements/mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  wordpress_data:
+  db_data:
+
+networks:
+  default:
