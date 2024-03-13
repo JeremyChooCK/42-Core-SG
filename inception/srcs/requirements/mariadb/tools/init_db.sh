@@ -1,12 +1,13 @@
 #!/bin/bash
+service mysql start
 
-# Wait for MariaDB to start
-sleep 10
+mysql -u root -e "CREATE DATABASE ${DB_NAME};"
+mysql -u root -e "CREATE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASSWORD}';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';"
+mysql -u root -e "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';"
 
-# Commands to create your database and users
-mysql -u root -p"Password123!" <<-EOSQL
-CREATE DATABASE IF NOT EXISTS wordpress;
-CREATE USER IF NOT EXISTS 'wp_user'@'%' IDENTIFIED BY 'wp_password';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wp_user'@'%';
-FLUSH PRIVILEGES;
-EOSQL
+# Not really necessary as server is locally hosted and does not have a public ip
+mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%';"
+
+mysql -u root -e "FLUSH PRIVILEGES;"
+mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';"

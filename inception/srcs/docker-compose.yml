@@ -1,39 +1,74 @@
-version: '3.7'
-
-services:
-  nginx:
-    build: ./requirements/nginx
-    ports:
-      - "443:443"
-    volumes:
-      - wordpress_data:/var/www/html # Adjusted to match the expected directory structure
-    depends_on:
-      - wordpress
-      - mariadb
-    restart: unless-stopped
-
-  wordpress:
-    build: ./requirements/wordpress
-    volumes:
-      - wordpress_data:/var/www/html # Ensure this matches your WordPress/nginx root
-    depends_on:
-      - mariadb
-    restart: unless-stopped
-
-  mariadb:
-    build: ./requirements/mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: unless-stopped
-
-volumes:
-  wordpress_data: # This volume is shared between WordPress and NGINX
-  db_data:
+version: '3.5'
 
 networks:
-  default:
+  inception:
+
+services:
+
+# #====MARIADB====
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    env_file: .env
+    build:
+      context: ./requirements/mariadb
+      args:
+         - DB_NAME=${DB_NAME}
+         - DB_USER=${DB_USER}
+         - DB_PASSWORD=${DB_PASSWORD}
+         - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    networks:
+      - inception
+    volumes:
+      - mariadb_vol:/var/lib/mysql
+    restart: unless-stopped
+
+  # #====WORDPRESS====
+
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    build:
+      context: ./requirements/wordpress
+    volumes:
+      - wordpress_vol:/var/www/wordpress
+    env_file: .env
+    depends_on:
+      - mariadb
+        # condition: service_healthy
+    networks:
+      - inception
+    restart: unless-stopped
+
+#=====NGINX======
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    volumes:
+      - wordpress_vol:/var/www/wordpress
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    networks:
+      - inception
+    ports:
+      - 443:443
+    restart: unless-stopped
+
+#volumes allow to store in a persistent disk the content in a local disk
+#Here we are setting up the binding of the volumes with the correct container
+volumes:
+    mariadb_vol:
+      driver: local
+      driver_opts:
+        device: "/home/mrojas-e/data/mariadb"
+        type: none
+        o: bind
+    wordpress_vol:
+      driver: local
+      driver_opts:
+        type: none
+        device: "/home/mrojas-e/data/wordpress"
+        o: bind

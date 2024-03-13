@@ -19,7 +19,7 @@ down:
 	docker-compose -f $(COMPOSE_FILE) down
 
 # Rebuild the services
-rebuild: down build up
+re: down build up
 
 # Default target
 all: build

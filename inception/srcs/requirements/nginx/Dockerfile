@@ -1,31 +1,33 @@
-# Use the penultimate stable Debian image as the base
+# Tell the system where from to build the image, in which OS to build upon
 FROM debian:buster
 
-# Install NGINX, openssl, and git
-RUN apt-get update && apt-get install -y nginx openssl git
+# install nginx and update the system (debian is limited with its package manager so run apt-get
+RUN apt-get update && \
+	apt-get  -y install nginx && \
+	apt-get install openssl
 
-# Setup SSL certificates
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/nginx-selfsigned.key \
-    -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
+# nginx SSL
+RUN mkdir  /etc/nginx/ssl
 
-# Clone the repository
-RUN rm -rf /var/www/html/* && \
-    git clone https://github.com/JeremyChooCK/2D-Car-learns-to-drive-with-N.E.A.T..git /var/www/html
+# Copy our config file in the nginx config folder
+# COPY ./conf/default /etc/nginx/sites-available
+COPY ./conf/nginx.conf /etc/nginx/sites-available
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
+#Create the self signed SSL certificates and out them in your own files (place them in a new folder)
+RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+	-out /etc/nginx/ssl/jechoo.crt \
+	-keyout /etc/nginx/ssl/jechoo.key \
+	#You could also save them in the ssl folder directly
+	# 	-out /etc/ssl/certs/jechoo.crt \
+	# -keyout /etc/ssl/private/jechoo.key \ 
+	-subj "/CN=jechoo.42.fr/"
 
-# Adjust permissions to ensure NGINX can access the files
-RUN chown -R www-data:www-data /var/www/html
+#the only port allowed gets exposed from the Docker file
+EXPOSE	443
 
-# Copy the corrected NGINX configuration file
-COPY conf/nginx.conf /etc/nginx/sites-available/myapp.conf
-
-# Enable the site configuration and remove the default symlink
-RUN ln -s /etc/nginx/sites-available/myapp.conf /etc/nginx/sites-enabled/ && \
-    rm /etc/nginx/sites-enabled/default
-
-# Expose the HTTPS port
-EXPOSE 443
-
-# Start NGINX in the foreground
+#The CMD command will run nginx, but since it runs in the background we need to 
+#leave it running in the foreground with the "daemon off;" flag otherwise when the image is
+#finished being built nginx will stop.
 CMD ["nginx", "-g", "daemon off;"]
+
+#-----------------------------

@@ -1,32 +1,39 @@
-# Use the penultimate stable Debian image as the base
+#========= WORDPRESS  DOCKERFILE ===========
+
 FROM debian:buster
 
-# Install Nginx and other necessary tools
-RUN apt-get update && \
-    apt-get install -y nginx git
+RUN apt-get update && apt-get -y install \
+	mariadb-client \
+	wget \
+	curl \
+	bash \
+	php \
+	php-cgi \
+	php-mysql \
+	php-fpm \
+	php-pdo \
+	php-gd php-cli \
+	php-mbstring \
+	&& rm -rf /var/lib/apt/lists/*
+# I need to install wp_cli command and put it in the right directory /usr/local/bin
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+  && chmod +x wp-cli.phar \
+  && mv wp-cli.phar /usr/local/bin/wp
 
-# Remove the default Nginx configuration
-RUN rm /etc/nginx/sites-enabled/default
+# Copy the .conf in the html directory 
+RUN mkdir -p /etc/php/7.3/fpm
+COPY ./www.conf /etc/php/7.3/fpm/pool.d
 
-# Clone your GitHub repository
-RUN git clone https://github.com/JeremyChooCK/2D-Car-learns-to-drive-with-N.E.A.T..git /var/www/html/myapp
+#Create the folder to enable php start
+RUN mkdir /run/php
 
-# Create a simple Nginx configuration to serve your project
-RUN echo "server {\n\
-    listen 80;\n\
-    server_name _;\n\
-    root /var/www/html/myapp;\n\
-    index index.html;\n\
-    location / {\n\
-        try_files \$uri \$uri/ =404;\n\
-    }\n\
-}" > /etc/nginx/sites-available/myapp
+#we copy the script, give the right to launch it in local on our computer
+COPY ./entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Enable the Nginx configuration
-RUN ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-# Expose port 80 to access Nginx
-EXPOSE 80
-
-# Start Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# make the working directory the one where the WP files are stored
+WORKDIR /var/www/wordpress
+#We expose the 9000 port
+EXPOSE 9000

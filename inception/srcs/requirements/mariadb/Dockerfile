@@ -1,22 +1,38 @@
-# Use the penultimate stable Debian image as the base
+#=========MariaDB DOCKERFILE===========
+
+# Tell the system where from to build the image, in which OS to build upon
 FROM debian:buster
 
-# Install MariaDB
-RUN apt-get update && apt-get install -y mariadb-server
+# DEPENDANCIES
+RUN apt-get update && apt-get install -y \
+	mariadb-server mariadb-client && \
+	rm -rf /var/lib/apt/lists/*
 
-# Copy our custom configuration (if any)
-COPY conf/my.cnf /etc/mysql/mariadb.conf.d/
+# Remove the original config file from mariadb and replace it with your own
+RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/my.conf /etc/mysql/mariadb.conf.d
+RUN mysql_install_db 
 
-# Copy the entrypoint script
-COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# You can use ENV to set permanently the environment variables during build time, 
+# if you use this then take the out "args" from the docker-compose.yml, else use ARG instead
+ARG DB_NAME=${DB_DATABASE}
+ARG DB_USER=${DB_USER}
+ARG DB_PASSWORD=${DB_PASSWORD}
+ARG DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
 
-# Copy initialization script to execute when the container starts
-COPY tools/init_db.sh /docker-entrypoint-initdb.d/
-RUN chmod +x /docker-entrypoint-initdb.d/init_db.sh
+# Copy the script to create your user in your desired folder where you will run it from
+COPY ./tools/init_db.sh /
 
-# Expose the default MariaDB port
-EXPOSE 3306
+#RUN chmod +x ./create_user.sh  to give permission
+RUN bash ./init_db.sh
+RUN service mysql stop
 
-# Use the entrypoint script to initialize and start MariaDB
-ENTRYPOINT ["entrypoint.sh"]
+# Do mind that this port will only be exposed for other docker containers but not for the host
+EXPOSE	3306
+
+#The CMD command will run nginx, but since it runs in the background we need to 
+#leave it running in the foreground with the "daemon off;" flag otherwise when the image is
+#finished being built nginx will stop.
+CMD ["mysqld_safe"]
+
+#-----------------------------
