@@ -1,11 +1,9 @@
-version: '3.5'
+version: '3.8'
 
 networks:
   inception:
 
 services:
-
-# #====MARIADB====
 
   mariadb:
     container_name: mariadb
@@ -24,8 +22,6 @@ services:
       - mariadb_vol:/var/lib/mysql
     restart: unless-stopped
 
-  # #====WORDPRESS====
-
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -36,12 +32,9 @@ services:
     env_file: .env
     depends_on:
       - mariadb
-        # condition: service_healthy
     networks:
       - inception
     restart: unless-stopped
-
-#=====NGINX======
 
   nginx:
     container_name: nginx
@@ -57,8 +50,6 @@ services:
       - 443:443
     restart: unless-stopped
 
-#volumes allow to store in a persistent disk the content in a local disk
-#Here we are setting up the binding of the volumes with the correct container
 volumes:
     mariadb_vol:
       driver: local
