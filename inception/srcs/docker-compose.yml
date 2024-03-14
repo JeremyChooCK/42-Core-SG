@@ -63,12 +63,12 @@ volumes:
     mariadb_vol:
       driver: local
       driver_opts:
-        device: "/home/mrojas-e/data/mariadb"
+        device: "/home/jechoo/data/mariadb"
         type: none
         o: bind
     wordpress_vol:
       driver: local
       driver_opts:
         type: none
-        device: "/home/mrojas-e/data/wordpress"
+        device: "/home/jechoo/data/wordpress"
         o: bind

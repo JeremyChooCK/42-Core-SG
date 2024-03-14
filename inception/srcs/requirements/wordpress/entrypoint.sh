@@ -32,15 +32,5 @@ wp user create $WP_USER $WP_USER_MAIL --role=author --user_pass=$WP_USER_PASSWOR
 wp option update home 'http://localhost' --allow-root
 wp option update siteurl 'http://localhost' --allow-root
 
-
-# Redis related configurations removed
-# wp config set WP_REDIS_HOST redis --allow-root
-# wp config set WP_REDIS_PORT 6379 --raw --allow-root
-# wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
-# wp config set WP_REDIS_CLIENT phpredis --allow-root
-# wp plugin install redis-cache --activate --allow-root
-# wp plugin update --all --allow-root
-# wp redis enable --allow-root
-
 # Launch PHP FPM in foreground, ignoring daemonize from conf file (-F)
 php-fpm7.3 -F
